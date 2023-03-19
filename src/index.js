@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import RuokaApp from './RuokaApp';
 import reportWebVitals from './reportWebVitals';
+//import Navbar from './components/Narbar';
+//import Resepti from './components/Resepti';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RuokaApp />
+   {/** <Navbar />
+    <Resepti/> */}
   </React.StrictMode>
 );
 

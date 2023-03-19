@@ -1,13 +1,42 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet');
+
+.content {max-width: 800px;
+margin: 50px auto;
+padding: 10px;
+color: #282c34;
+background-color: rgba(90, 152, 168, 0.601);
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+font-size: 18px;
+color: black;};
+
+.resepti{
+  text-align: left;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  color: #156473ff;
+  font-size: 170%;
+}
+
+h2 {
+  color: #156473ff;
+  font-size: 145%;
+}
+
+p {
+  color: #000;
+ font-size: 125%;
+}
+
+.row {
+  display: flex;
+}
+.column {
+  flex: 100%;
+  padding: 3px;
 }
