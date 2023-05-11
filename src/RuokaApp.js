@@ -1,28 +1,34 @@
-//import Resepti from "./components/Resepti";
-import Laatijalista from "./components/Laatijalista";
-import Reseptilista from "./components/Reseptilista";
-import Reseptilomake from "./components/ReseptiLomake";
+import React from 'react';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
+import TabMUI from './navi/TabMUI';
+import ReseptilistaMUI from './components/ReseptilistaMUI';
+import ReseptilomakeMUI from './components/ReseptilomakeMUI';
+import ReseptiMuokkaaMUI from './components/ReseptiMuokkaaMUI';
+import LaatijalistaMUI from "./components/LaatijalistaMUI";
+import LaatijalomakeMUI from './components/LaatijalomakeMUI';
+import LaatijaMuokkaaMUI from './components/LaatijaMuokkaaMUI';
+import Reseptit from './components/Reseptit';
+import Karuselli from './components/Karuselli';
+import {BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
-const resepti = {
+/*const resepti = {
   id: 1,
   nimi: "Täytetyt avokadot",
+  kuva: "./avocado.jpg",
   kuvaus: "Katkaravuilla ja homejuustolla täytetyt avokadot.",
   ainekset:
-    "1 avokado, 20 katkaravunpyrstöä, 2 rkl kermaviiliä, 2 rkl majoneesia, 2rkl sinihomejuustoa" /*{
-    aines1: "1 avokado",
-    aines2: "20 katkaravunpyrstöä",
-    aines3: "2 rkl kermaviiliä",
-    aines4: "2 rkl majoneesia",
-    aines5: "2rkl sinihomejuustoa",
-  },*/,
+    "1 avokado, 20 katkaravunpyrstöä, 2 rkl kermaviiliä, 2 rkl majoneesia, 2rkl sinihomejuustoa",
   ohje: "Leikkaa avokadot pitkittäin kahtia ja poista kivi. Täytä kolo katkaravuilla. Murusta homejuusto ja sekoita joukkoon kermaviili sekä majoneesi. Valuta kastike katkaravuille ja avokadonpuolikkaille.",
   kesto: 20,
-};
-
+};*/
+/*
 const reseptitTaulukko = [
   {
     id: 1,
     nimi: "Tomaattinen linssi-palvikinkkupata",
+    kuva: "./linssipata.jpg",
     kuvaus:
       "Maukas arkiruoka valmistuu kuivaruokakaapin tarvikkeista, säilykkeistä ja jääkaapissa hyvin säilyvistä tuotteista. Muhevuudestaan huolimatta, tämä ruokaisa pata ei vaadi pitkää haudutusaikaa. Pata maistuu maalaisleivän kanssa nautittuna tai lisukeriisin kanssa.",
     kesto: 15,
@@ -33,6 +39,7 @@ const reseptitTaulukko = [
   {
     id: 2,
     nimi: "Pestopasta",
+    kuva: "./pestopasta.jpg",
     kuvaus:
       "Joskus yksinkertaisuus on valttia. Tämän herkullisen pestopastan salaisuus on itse tehdyssä pestossa.",
     kesto: 30,
@@ -43,6 +50,7 @@ const reseptitTaulukko = [
   {
     id: 3,
     nimi: "Unelmarahkatorttu",
+    kuva: "./rahkatorttu.jpg",
     kuvaus:
       "Unelmatorttu raikkaalla ja sitruunaisella rahka-kreemitäytteellä. Kääretorttu on vaivaton valmistaa ja siitä riittää isommallekkin porukalle herkutella.",
     kesto: 45,
@@ -53,6 +61,7 @@ const reseptitTaulukko = [
   {
     id: 4,
     nimi: "Täytetyt avokadot",
+    kuva: "./avocado.jpg",
     kuvaus: "Katkaravuilla ja homejuustolla täytetyt avokadot.",
     kesto: 20,
     ainekset:
@@ -62,30 +71,44 @@ const reseptitTaulukko = [
 ];
 
 const laatijatTaulukko = [
-  { id: 1, etunimi: 'Minna', liitymisPvm: '15.2.2023', kuva: 'hyvä kuva' },
-  { id: 2, etunimi: 'Iina', liitymisPvm: '18.5.2022', kuva: 'hyvä kuva' },
-  {id: 3, etunimi: 'Markus', liitymisPvm: '15.1.2023', kuva: 'hyvä kuva'}
+  { id: 1, etunimi: 'Minna', paiva: '15.2.2023', kuva: "./kuva1.jpg", kuvaNimi:'./kuva1.jpg' },
+  { id: 2, etunimi: 'Iina', paiva: '18.5.2022', kuva: './kuva2.jpg', kuvaNimi:'Toinen kuva' },
+  {id: 3, etunimi: 'Matti', paiva: '15.1.2023', kuva: './kuva3.png', kuvaNimi:'kolmas kuva'}
 ]
-
+*/
+const theme = createTheme({
+  palette: {
+    primary: { main: '#ffc77d', contrastText: '#880061' },
+    secondary: { main: '#da707b', light: '#fff2df'},
+    text: {
+      text: { primary: '#880061', secondary: '##f5b6da', contrastText: '#FFFFFF', disabled: 'rgba(0,0,0,0.29)' },
+      background: { default: '#fff2df' },
+      typography: { fontFamily: ['Lato', 'Sans Serif'] }, 
+    }
+  }
+});
 
 function RuokaApp() {
   return (
-    <div className="content">
-      <h1>Reseptikirja</h1>
-      {/*<Resepti resProps={resepti} />*/}
-      <h2>Kaikki reseptikirjan reseptit:</h2>
-      <div className="">
-        <Reseptilista reseptitpropsi={reseptitTaulukko} />
-      </div>
-      <div className="column">
-        <h2>Lisää uusi resepti:</h2>
-        <Reseptilomake />
-      </div>
-      <div>
-        <h2>Reseptien laatijat:</h2>
-        <Laatijalista laatijatpropsi={laatijatTaulukko}/>
-      </div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<TabMUI />}>
+            <Route index element={<ReseptilistaMUI /> } /> 
+            <Route path='kuvat' element={<Karuselli/>} />
+            <Route path='rlomake' element={<ReseptilomakeMUI />} />
+            <Route path='muokkaaresepti/:id/:nimi/:kuvaus/:ainekset/:ohje/:kesto/:kuva' element={<ReseptiMuokkaaMUI/>}/>
+            <Route path='laatijat' element={<LaatijalistaMUI />} />
+            <Route path='llomake' element={<LaatijalomakeMUI />} />
+            <Route path='muokkaahlo/:idl/:etunimi' element={<LaatijaMuokkaaMUI/>}/>
+            <Route path='hae' element={<Reseptit />} />
+            <Route path='*' element={<Typography variant="h6" sx={{marginTop: 5, fontWeight:'bold'}}>Sivua ei löydy</Typography>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

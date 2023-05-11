@@ -1,18 +1,19 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet');
 
-.content {max-width: 800px;
-margin: 50px auto;
-padding: 10px;
-color: #282c34;
-background-color: rgba(90, 152, 168, 0.601);
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-font-size: 18px;
-color: black;};
+.content {
+  /*max-width: 800px;*/
+  margin: 50px auto;
+  padding: 10px;
+  color: #282c34;
+  background-color: rgba(90, 152, 168, 0.601);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: black;};
 
 .resepti{
   text-align: left;

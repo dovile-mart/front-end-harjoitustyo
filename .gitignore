@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#ruokaBack node_modules
+ruokaBack/node_modules
