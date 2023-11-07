@@ -1,4 +1,12 @@
-# Getting Started with Create React App
+![Etusivu](https://github.com/dovile-mart/front-end-harjoitustyo/assets/71691245/98bd1dfb-a453-4274-8d4e-942b45945c30)
+![image](https://github.com/dovile-mart/front-end-harjoitustyo/assets/71691245/c530efa8-b7ce-49f5-bf0d-41e936911a97)
+![image](https://github.com/dovile-mart/front-end-harjoitustyo/assets/71691245/b6b6d408-46b1-4205-b557-067e6e6a250f)
+![image](https://github.com/dovile-mart/front-end-harjoitustyo/assets/71691245/a7414fa7-4a46-4aa5-9624-660be8c338e6)
+![laatijan luontilomake](https://github.com/dovile-mart/front-end-harjoitustyo/assets/71691245/087f1fbf-1a52-46d6-b234-7a8bea8a7e7f)
+![resepti](https://github.com/dovile-mart/front-end-harjoitustyo/assets/71691245/818129f4-ed22-4c82-a8c8-a81765154544)
+
+
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -68,3 +76,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-->
