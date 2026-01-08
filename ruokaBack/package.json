@@ -4,8 +4,8 @@
   "description": "",
   "main": "luoKanta.js",
   "scripts": {
-    "start": "node luoKanta.js",
-    "run": "nodemon ruokaServer.js",
+    "db:init": "node luoKanta.js",
+    "start": "node ruokaServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dovile",
