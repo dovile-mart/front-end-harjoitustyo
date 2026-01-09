@@ -156,10 +156,8 @@ function ReseptilistaMUI() {
                             
                                 <CardActions>
                                     <ExpandMore
-                                    // expand={expanded}
+                                        expand={expanded}
                                         onClick={handleExpandClick}
-                                    // aria-expanded={expanded}
-                                    // aria-label="show more"
                                         sx={{
                                             bgcolor: '#da707b',
                                             '&:hover': {
