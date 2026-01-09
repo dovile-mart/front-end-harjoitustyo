@@ -47,6 +47,7 @@ function ReseptilomakeMUI() {
   }
 
   const lisaaResepti = (e) => {
+    console.log("RESEPTI STATE: ", resepti);
     const formData = new FormData();
     formData.append('nimi', resepti.nimi);
     formData.append('kuva', resepti.kuva);
@@ -54,7 +55,7 @@ function ReseptilomakeMUI() {
     formData.append('kesto', resepti.kesto);
     formData.append('ainekset', resepti.ainekset);
     formData.append('ohje', resepti.ohje);
-    formData.append('idl', resepti.idl);
+    formData.append('idl', resepti.laatija);
     try {
       addResepti(formData);
    //   setValues({ nimi: '', kuvaus: '', ainekset: '', ohje: '', kesto: '', kuva: [] });
@@ -187,12 +188,12 @@ function ReseptilomakeMUI() {
           <InputLabel variant="standard" htmlFor="laatija">
             Laatija
           </InputLabel>
-          <NativeSelect defaultValue={1} inputProps={{ name: 'laatija',
-              idl: 'idl',
+          <NativeSelect defaultValue={1} onChange={(e) => lisaa(e)} inputProps={{ name: 'laatija',
+              id: 'laatija',
             }}
           >
             {laatijat.map(laatija => (
-              <option key={laatija.idl} value={laatija.idl}  onChange={(e) => lisaa(e)}>{laatija.etunimi}</option>
+              <option key={laatija.idl} value={laatija.idl}>{laatija.etunimi}</option>
             ))}
           </NativeSelect>
         </FormControl>

@@ -59,15 +59,19 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 app.post('/resepti/add', upload.single('kuva'), (req, res, next) => {
+		console.log("======= BACKEND DEBUG ==========");
+	console.log("BODY:", req.body);
+	console.log("FILE:", req.file);
+	console.log("======= BACKEND DEBUG ==========");
 	let resepti = req.body;
-	let laatija = req.body;
+	//let laatija = req.body;
 	let kuvaNimi = null;
 	if (req.file) {
 		kuvaNimi = req.file.originalname;
 	}
 	//db.serialize(()=>{
 		db.run('INSERT INTO resepti (nimi,kuva,kuvaus,kesto,ainekset,ohje,idl) VALUES (?, ?, ?, ?, ?, ?,?)',
-			[resepti.nimi, kuvaNimi, resepti.kuvaus, resepti.kesto, resepti.ainekset, resepti.ohje, laatija.idl], (error, result) => {
+			[resepti.nimi, kuvaNimi, resepti.kuvaus, resepti.kesto, resepti.ainekset, resepti.ohje, resepti.idl], (error, result) => {
 				if (error) throw error;
 			return res.status(200).json({ count: 1 });
 		});
