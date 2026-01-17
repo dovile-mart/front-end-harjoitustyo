@@ -2,6 +2,21 @@ const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("ruoka.db");
 
 db.serialize(() => {
+  // Drop tables if they exist to start fresh
+  db.run("DROP TABLE IF EXISTS resepti", (err) => {
+    if (err) {
+      return console.log('resepti-taulu drop ' + err.message);
+    }
+    console.log("Resepti-taulu droppattu");
+  });
+
+  db.run("DROP TABLE IF EXISTS laatija", (err) => {
+    if (err) {
+      return console.log('laatija-taulu drop ' + err.message);
+    }
+    console.log("Laatija-taulu droppattu");
+  });
+
   let sql = "CREATE TABLE laatija (" +
     "idl integer PRIMARY KEY NOT NULL, " +
     "etunimi text NOT NULL, " +
@@ -45,7 +60,7 @@ db.serialize(() => {
   }    console.log("Resepti-taulu luotu");
   }) 
       
-  sql = "INSERT INTO `resepti` (`nimi`, `kuva`, `kuvaus`, `kesto`, `ainekset`, `ohje`, 'idl') " +
+  sql = "INSERT INTO `resepti` (`nimi`, `kuva`, `kuvaus`, `kesto`, `ainekset`, `ohje`, `idl`) " +
       " VALUES "
       + "('Tomaattinen linssi-palvikinkkupata', 'linssipata.jpg', 'Maukas arkiruoka valmistuu kuivaruokakaapin tarvikkeista, säilykkeistä ja jääkaapissa hyvin säilyvistä tuotteista. Muhevuudestaan huolimatta, tämä ruokaisa pata ei vaadi pitkää haudutusaikaa. Pata maistuu maalaisleivän kanssa nautittuna tai lisukeriisin kanssa.', 15, '250g savukylkeä, 150 g sipulia hienonnettua, 2rkl vehnäjauhoja, 400g säilyketomaatteja, 380g esikeitettyjä punaisia linssejä, 2,5dl ruokakermaa, 1 kasvisliemikuutio, 35g suolakurkkua kuutioituna, ½tl sokeria, kuivattua ruohosipulia tai persiljaa.', 'Paloittele savukylki. Ruskista palat isossa valurautapadassa tai kattilassa kannen alla, lisää loppuvaiheessa hienonnettu sipuli. HUOM! Noudata erityistä varovaisuutta lihan ruskistamisessa ja käytä kantta. Liha ja rasva räiskyy voimakkaasti. Ennen sipulin lisäämistä, nosta astia sivuun sekoita ja sulje taas kansi. Ripottele joukkoon vehnäjauho. Kääntele hetki. Lisää joukkoon säilyketomaatit, huuhtele tölkit tilkkasella vettä. Lisää myös linssit, ruokakerma ja liemikuutio. Anna kiehua hiljalleen kannen alla 5 min. Jos käytät kuivattuja linssejä, huuhtele ne siivilässä ennen lisäämistä ja tarkista pakkauksesta kypsymisaika. Kuivatut linssit eivät sisällä suolaa, joten käytä silloin kokonainen liemikuutio ruokaan. Lisää suolakurkut ja mausta sokerilla. Viimeistele ruohosipulilla tai persiljalla. Tarjoa pata keitetyn riisin tai maalaisleivän kanssa.', 1),"//
       + "('Pestopasta', 'pestopasta.jpg', 'Joskus yksinkertaisuus on valttia. Tämän herkullisen pestopastan salaisuus on itse tehdyssä pestossa.', 30, '500g tuorepastaa, PESTO: 2 ruukkua tuoretta basilikaa, 2 valkosipulin kynttä, 75g cashewpähkinöitä, 1½dl oliiviöljyä, ½tl suolaa, 1½dl	Mustaleima raastetta. PÄÄLLE: ½dl Mustaleima raastetta, tuoretta basilikaa', 'Valmista pesto: Mittaa ainekset blenderiin tai mittakannuun. Soseuta blenderillä tai sauvasekoittimella, kunnes peston koostumus on sopivaa. Mausta suolalla ja pippurilla. Keitä pasta runsaassa suolalla maustetussa vedessä pakkauksen ohjeen mukaan. Sekoita pesto valutetun, kuuman pastan joukkoon. Viimeistele annokset juustoraasteella ja basilikalla. Tarjoa heti.', 1),"//
