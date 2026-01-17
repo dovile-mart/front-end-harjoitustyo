@@ -78,9 +78,9 @@ export const editLaatija = async (id, data) => {
     throw new Error('Laatijan muokkaus ei onnistunut')
 }
 }
-export const editResepti = async (id) => {
+export const editResepti = async (id, data) => {
     try {
-    await axios.put(palvelin + '/resepti/edit/' + id); // put
+    await axios.put(palvelin + '/resepti/edit/' + id, data); // put
     //return (response.data.count);
 } catch (error) {
     throw new Error('Reseptin muokkaus ei onnistunut')

@@ -113,8 +113,10 @@ app.get('/resepti/delete/:id', (req, res, next) => {
 app.put('/resepti/edit/:id', (req, res, next) => {
 	let id = req.params.id;
 	let resepti = req.body;
-	db.run('UPDATE resepti SET nimi=? WHERE id=?', [resepti.nimi, id], (error, result)=> {
+	db.run('UPDATE resepti SET nimi=?, kuvaus=?, ainekset=?, ohje=?, kesto=?, kuva=?, idl=? WHERE id=?', [resepti.nimi, resepti.kuvaus, resepti.ainekset, resepti.ohje, resepti.kesto, resepti.kuva, resepti.idl, id], (error, result)=> {
 		console.log('Yritetään muokata reseptin tietoja, id: ' + id);
+		console.log(resepti.nimi);
+		console.log(resepti);
 		if (error) throw error;
 		return res.status(200).json( {count: this.changes} );
 	})

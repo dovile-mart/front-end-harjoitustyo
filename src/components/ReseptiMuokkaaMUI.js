@@ -50,24 +50,11 @@ function ReseptiMuokkaaMUI() {
           })
       }
     
-      const muokkaaResepti = (e) => {
-      /*  setViesti("Resepti lisätty reseptikirjaan onnistuneesti!");
-        //setViesti("Resepti lisättiin");
-        console.log(viesti);*/
-        
-        const formData = new FormData();
-        formData.append('nimi', resepti.nimi);
-        formData.append('kuva', resepti.kuva);
-        formData.append('kuvaus', resepti.kuvaus);
-        formData.append('kesto', resepti.kesto);
-        formData.append('ainekset', resepti.ainekset);
-        formData.append('ohje', resepti.ohje);
-        formData.append('laatija', resepti.idl);
-        try {
-          editResepti(formData);
-       //   setValues({ nimi: '', kuvaus: '', ainekset: '', ohje: '', kesto: '', kuva: [] });
-          setViesti('Resepti muokattu');
-          setValues({
+  const muokkaaResepti = (e) => {
+    try {
+      editResepti(resepti.id, resepti);
+      setViesti('Resepti '+ resepti.id + ' muokattu onnistuneesti');
+     /* setValues({
             nimi: "",
             kuvaus: "",
             ainekset: "",
@@ -75,7 +62,7 @@ function ReseptiMuokkaaMUI() {
             kesto: 0,
             kuva: "",
             idl:""
-        });
+        });*/
     
         } catch (error) {
           setViesti('Reseptin muokkaus epäonnistui')
