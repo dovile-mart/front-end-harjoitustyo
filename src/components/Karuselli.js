@@ -50,7 +50,7 @@ function Karuselli() {
             sx={{ borderBottom: 1, borderColor:'secondary.main' }}
             secondaryAction={
               <Box>
-                <IconButton color='primary' component={Link} to={'/muokkaaresepti/' + resepti.id +'/'+ resepti.nimi + '/'+resepti.kuvaus+'/'+resepti.ainekset+'/'+resepti.ohje+'/'+resepti.kesto+'/'+resepti.kuva}><EditIcon />
+                <IconButton color='primary' component={Link} to={'/muokkaaresepti/' + resepti.id +'/'+ resepti.nimi + '/'+resepti.kuvaus+'/'+resepti.ainekset+'/'+resepti.ohje+'/'+resepti.kesto+'/'+resepti.kuva + '/' + resepti.idl}><EditIcon />
                   </IconButton>
                 <IconButton color='secondary' onClick={() => poista(resepti.id)}><DeleteIcon />
                   </IconButton>

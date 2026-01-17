@@ -15,7 +15,7 @@ import NativeSelect from '@mui/material/NativeSelect';
 
 function ReseptiMuokkaaMUI() {
 
-    let { id, nimi, kuvaus, ainekset, ohje, kesto, kuva } = useParams();
+    let { id, nimi, kuvaus, ainekset, ohje, kesto, kuva, idl } = useParams();
     const [viesti, setViesti] = useState('');
     const [resepti, setValues] = useState({
         id: id,
@@ -25,7 +25,7 @@ function ReseptiMuokkaaMUI() {
         ohje: ohje,
         kesto: kesto,
         kuva: kuva,
-//        laatija:""
+        idl: idl
       });
     
 
@@ -79,7 +79,7 @@ function ReseptiMuokkaaMUI() {
             ohje: "",
             kesto: 0,
           kuva: "",
-            idl: setLaatijat[1]
+            idl: 1
         });
         setViesti("Lomake tyhjennetty");
         console.log(viesti);
@@ -183,12 +183,12 @@ function ReseptiMuokkaaMUI() {
               <InputLabel variant="standard" htmlFor="laatija">
                 Laatija
               </InputLabel>
-              <NativeSelect defaultValue={1} inputProps={{ name: 'laatija',
-                  idl: 'idl',
+              <NativeSelect value={resepti.idl} onChange={(e) => lisaa(e)} inputProps={{ name: 'idl',
+                  id: 'idl',
                 }}
               >
                 {laatijat.map(laatija => (
-                  <option key={laatija.idl} value={laatija.idl}  onChange={(e) => lisaa(e)}>{laatija.etunimi}</option>
+                  <option key={laatija.idl} value={laatija.idl}>{laatija.etunimi}</option>
                 ))}
               </NativeSelect>
             </FormControl>

@@ -99,7 +99,7 @@ function RuokaApp() {
             <Route index element={<ReseptilistaMUI /> } /> 
             <Route path='kuvat' element={<Karuselli/>} />
             <Route path='rlomake' element={<ReseptilomakeMUI />} />
-            <Route path='muokkaaresepti/:id/:nimi/:kuvaus/:ainekset/:ohje/:kesto/:kuva' element={<ReseptiMuokkaaMUI/>}/>
+            <Route path='muokkaaresepti/:id/:nimi/:kuvaus/:ainekset/:ohje/:kesto/:kuva/:idl' element={<ReseptiMuokkaaMUI/>}/>
             <Route path='laatijat' element={<LaatijalistaMUI />} />
             <Route path='llomake' element={<LaatijalomakeMUI />} />
             <Route path='muokkaahlo/:idl/:etunimi' element={<LaatijaMuokkaaMUI/>}/>
