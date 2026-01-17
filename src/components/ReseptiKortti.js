@@ -11,7 +11,7 @@ const ReseptiKortti = ({ kuva }) => {
                 <CardMedia
                     component="img"
                     height="250"
-                    image={ kuva.startsWith('http') ? kuva : 'http://localhost:8080/download/' + kuva}
+                    image={ kuva? kuva.startsWith('http') ? kuva : 'http://localhost:8080/download/' + kuva : null}
                     alt="Kuvan kuvaus"
                 />
             </Box>

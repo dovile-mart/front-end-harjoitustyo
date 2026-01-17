@@ -138,7 +138,7 @@ function ReseptilistaMUI() {
                                     <CardMedia
                                         component="img"
                                         height="300"
-                                        image={ resepti.kuva.startsWith('http') ? resepti.kuva : 'http://localhost:8080/download/' + resepti.kuva }
+                                        image={ resepti.kuva ? resepti.kuva.startsWith('http') ? resepti.kuva : 'http://localhost:8080/download/' + resepti.kuva : null}
                                         alt="Kuvan kuvaus"
                                     />
                                     <div style={{ position: "absolute", color: "white", fontWeight:'bolder', bottom: 10, left: 10, transform: "translateX(0)", backgroundColor: '#da707b', padding:2, borderStyle:'ridge' }}>
