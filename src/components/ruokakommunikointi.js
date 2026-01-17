@@ -72,7 +72,7 @@ export const getKuvat = async () => {
 //ei tehty loppuun
 export const editLaatija = async (id, data) => {
     try {
-    axios.put(palvelin + '/laatija/edit/' + id, data);
+    await axios.put(palvelin + '/laatija/edit/' + id, data);
     //return (response.data.count);
 } catch (error) {
     throw new Error('Laatijan muokkaus ei onnistunut')
