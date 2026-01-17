@@ -2,22 +2,7 @@ const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("ruoka.db");
 
 db.serialize(() => {
-  // Drop tables if they exist to start fresh
-  db.run("DROP TABLE IF EXISTS resepti", (err) => {
-    if (err) {
-      return console.log('resepti-taulu drop ' + err.message);
-    }
-    console.log("Resepti-taulu droppattu");
-  });
-
-  db.run("DROP TABLE IF EXISTS laatija", (err) => {
-    if (err) {
-      return console.log('laatija-taulu drop ' + err.message);
-    }
-    console.log("Laatija-taulu droppattu");
-  });
-
-  let sql = "CREATE TABLE laatija (" +
+  let sql = "CREATE TABLE IF NOT EXISTS laatija (" +
     "idl integer PRIMARY KEY NOT NULL, " +
     "etunimi text NOT NULL, " +
     "paiva date, " +
@@ -43,7 +28,7 @@ db.serialize(() => {
     console.log("Laatijarivit lisättiin");
   })
 
-  sql = "CREATE TABLE resepti (" +
+  sql = "CREATE TABLE IF NOT EXISTS resepti (" +
         "id integer PRIMARY KEY NOT NULL, " +
         "nimi text NOT NULL, " +
         "kuva text, " +
@@ -60,12 +45,12 @@ db.serialize(() => {
   }    console.log("Resepti-taulu luotu");
   }) 
       
-  sql = "INSERT INTO `resepti` (`nimi`, `kuva`, `kuvaus`, `kesto`, `ainekset`, `ohje`, `idl`) " +
+  sql = "INSERT INTO `resepti` (`id`, `nimi`, `kuva`, `kuvaus`, `kesto`, `ainekset`, `ohje`, `idl`) " +
       " VALUES "
-      + "('Tomaattinen linssi-palvikinkkupata', 'linssipata.jpg', 'Maukas arkiruoka valmistuu kuivaruokakaapin tarvikkeista, säilykkeistä ja jääkaapissa hyvin säilyvistä tuotteista. Muhevuudestaan huolimatta, tämä ruokaisa pata ei vaadi pitkää haudutusaikaa. Pata maistuu maalaisleivän kanssa nautittuna tai lisukeriisin kanssa.', 15, '250g savukylkeä, 150 g sipulia hienonnettua, 2rkl vehnäjauhoja, 400g säilyketomaatteja, 380g esikeitettyjä punaisia linssejä, 2,5dl ruokakermaa, 1 kasvisliemikuutio, 35g suolakurkkua kuutioituna, ½tl sokeria, kuivattua ruohosipulia tai persiljaa.', 'Paloittele savukylki. Ruskista palat isossa valurautapadassa tai kattilassa kannen alla, lisää loppuvaiheessa hienonnettu sipuli. HUOM! Noudata erityistä varovaisuutta lihan ruskistamisessa ja käytä kantta. Liha ja rasva räiskyy voimakkaasti. Ennen sipulin lisäämistä, nosta astia sivuun sekoita ja sulje taas kansi. Ripottele joukkoon vehnäjauho. Kääntele hetki. Lisää joukkoon säilyketomaatit, huuhtele tölkit tilkkasella vettä. Lisää myös linssit, ruokakerma ja liemikuutio. Anna kiehua hiljalleen kannen alla 5 min. Jos käytät kuivattuja linssejä, huuhtele ne siivilässä ennen lisäämistä ja tarkista pakkauksesta kypsymisaika. Kuivatut linssit eivät sisällä suolaa, joten käytä silloin kokonainen liemikuutio ruokaan. Lisää suolakurkut ja mausta sokerilla. Viimeistele ruohosipulilla tai persiljalla. Tarjoa pata keitetyn riisin tai maalaisleivän kanssa.', 1),"//
-      + "('Pestopasta', 'pestopasta.jpg', 'Joskus yksinkertaisuus on valttia. Tämän herkullisen pestopastan salaisuus on itse tehdyssä pestossa.', 30, '500g tuorepastaa, PESTO: 2 ruukkua tuoretta basilikaa, 2 valkosipulin kynttä, 75g cashewpähkinöitä, 1½dl oliiviöljyä, ½tl suolaa, 1½dl	Mustaleima raastetta. PÄÄLLE: ½dl Mustaleima raastetta, tuoretta basilikaa', 'Valmista pesto: Mittaa ainekset blenderiin tai mittakannuun. Soseuta blenderillä tai sauvasekoittimella, kunnes peston koostumus on sopivaa. Mausta suolalla ja pippurilla. Keitä pasta runsaassa suolalla maustetussa vedessä pakkauksen ohjeen mukaan. Sekoita pesto valutetun, kuuman pastan joukkoon. Viimeistele annokset juustoraasteella ja basilikalla. Tarjoa heti.', 1),"//
-      + "('Unelmarahkatorttu', 'rahkatorttu.jpg', 'Unelmatorttu raikkaalla ja sitruunaisella rahka-kreemitäytteellä. Kääretorttu on vaivaton valmistaa ja siitä riittää isommallekkin porukalle herkutella.', 45, 'POHJA: 4 kananmunaa, 1½dl sokeria, 1dl perunajauhoja, ½dl kaakaojauhetta, 1tl leivinjauhetta. TÄYTE: 200g vaniljakreemiä, 200g sitruunarahkaa.', 'Vatkaa huoneenlämpöiset munat ja sokeri paksuksi, vaaleaksi vaahdoksi. Yhdistä kuivat aineet. Lisää ne siivilän läpi vaahtoon varovasti sekoittaen. Levitä taikina leivinpaperilla vuoratulle uunipellille. Paista 200 asteessa n. 8 min tai kunnes kypsä. Kumoa pohja sokerilla sirotetulle leivinpaperille. Irrota pohjapaperi. Sekoita kreemi ja rahka. Levitä seos jäähtyneelle kääretorttupohjalle. Kääri rullaksi. Anna tekeytyä hetki kylmässä ja leikkaa paloiksi.', 2),"//
-    + "('Täytetyt avokadot', 'avocado.jpg', 'Katkaravuilla ja homejuustolla täytetyt avokadot.', 20, '1 avokado, 20 katkaravunpyrstöä, 2 rkl kermaviiliä, 2 rkl majoneesia, 2rkl sinihomejuustoa.', 'Leikkaa avokadot pitkittäin kahtia ja poista kivi. Täytä kolo katkaravuilla. Murusta homejuusto ja sekoita joukkoon kermaviili sekä majoneesi. Valuta kastike katkaravuille ja avokadonpuolikkaille.', 3)";
+      + "(1, 'Tomaattinen linssi-palvikinkkupata', 'linssipata.jpg', 'Maukas arkiruoka valmistuu kuivaruokakaapin tarvikkeista, säilykkeistä ja jääkaapissa hyvin säilyvistä tuotteista. Muhevuudestaan huolimatta, tämä ruokaisa pata ei vaadi pitkää haudutusaikaa. Pata maistuu maalaisleivän kanssa nautittuna tai lisukeriisin kanssa.', 15, '250g savukylkeä, 150 g sipulia hienonnettua, 2rkl vehnäjauhoja, 400g säilyketomaatteja, 380g esikeitettyjä punaisia linssejä, 2,5dl ruokakermaa, 1 kasvisliemikuutio, 35g suolakurkkua kuutioituna, ½tl sokeria, kuivattua ruohosipulia tai persiljaa.', 'Paloittele savukylki. Ruskista palat isossa valurautapadassa tai kattilassa kannen alla, lisää loppuvaiheessa hienonnettu sipuli. HUOM! Noudata erityistä varovaisuutta lihan ruskistamisessa ja käytä kantta. Liha ja rasva räiskyy voimakkaasti. Ennen sipulin lisäämistä, nosta astia sivuun sekoita ja sulje taas kansi. Ripottele joukkoon vehnäjauho. Kääntele hetki. Lisää joukkoon säilyketomaatit, huuhtele tölkit tilkkasella vettä. Lisää myös linssit, ruokakerma ja liemikuutio. Anna kiehua hiljalleen kannen alla 5 min. Jos käytät kuivattuja linssejä, huuhtele ne siivilässä ennen lisäämistä ja tarkista pakkauksesta kypsymisaika. Kuivatut linssit eivät sisällä suolaa, joten käytä silloin kokonainen liemikuutio ruokaan. Lisää suolakurkut ja mausta sokerilla. Viimeistele ruohosipulilla tai persiljalla. Tarjoa pata keitetyn riisin tai maalaisleivän kanssa.', 1),"//
+      + "(2, 'Pestopasta', 'pestopasta.jpg', 'Joskus yksinkertaisuus on valttia. Tämän herkullisen pestopastan salaisuus on itse tehdyssä pestossa.', 30, '500g tuorepastaa, PESTO: 2 ruukkua tuoretta basilikaa, 2 valkosipulin kynttä, 75g cashewpähkinöitä, 1½dl oliiviöljyä, ½tl suolaa, 1½dl	Mustaleima raastetta. PÄÄLLE: ½dl Mustaleima raastetta, tuoretta basilikaa', 'Valmista pesto: Mittaa ainekset blenderiin tai mittakannuun. Soseuta blenderillä tai sauvasekoittimella, kunnes peston koostumus on sopivaa. Mausta suolalla ja pippurilla. Keitä pasta runsaassa suolalla maustetussa vedessä pakkauksen ohjeen mukaan. Sekoita pesto valutetun, kuuman pastan joukkoon. Viimeistele annokset juustoraasteella ja basilikalla. Tarjoa heti.', 1),"//
+      + "(3, 'Unelmarahkatorttu', 'rahkatorttu.jpg', 'Unelmatorttu raikkaalla ja sitruunaisella rahka-kreemitäytteellä. Kääretorttu on vaivaton valmistaa ja siitä riittää isommallekkin porukalle herkutella.', 45, 'POHJA: 4 kananmunaa, 1½dl sokeria, 1dl perunajauhoja, ½dl kaakaojauhetta, 1tl leivinjauhetta. TÄYTE: 200g vaniljakreemiä, 200g sitruunarahkaa.', 'Vatkaa huoneenlämpöiset munat ja sokeri paksuksi, vaaleaksi vaahdoksi. Yhdistä kuivat aineet. Lisää ne siivilän läpi vaahtoon varovasti sekoittaen. Levitä taikina leivinpaperilla vuoratulle uunipellille. Paista 200 asteessa n. 8 min tai kunnes kypsä. Kumoa pohja sokerilla sirotetulle leivinpaperille. Irrota pohjapaperi. Sekoita kreemi ja rahka. Levitä seos jäähtyneelle kääretorttupohjalle. Kääri rullaksi. Anna tekeytyä hetki kylmässä ja leikkaa paloiksi.', 2),"//
+    + "(4, 'Täytetyt avokadot', 'avocado.jpg', 'Katkaravuilla ja homejuustolla täytetyt avokadot.', 20, '1 avokado, 20 katkaravunpyrstöä, 2 rkl kermaviiliä, 2 rkl majoneesia, 2rkl sinihomejuustoa.', 'Leikkaa avokadot pitkittäin kahtia ja poista kivi. Täytä kolo katkaravuilla. Murusta homejuusto ja sekoita joukkoon kermaviili sekä majoneesi. Valuta kastike katkaravuille ja avokadonpuolikkaille.', 3)";
   
   db.run(sql, (err) => {
     if (err) {
