@@ -104,15 +104,16 @@ app.get('/resepti/delete/:id', (req, res, next) => {
 	db.run('DELETE FROM resepti WHERE id = ?', [id], function (error, result) {
 		console.log('Yritetään poistaa resepti id:llä: ' + id);
 		if (error) throw error;
+		console.log("Resepti " + id + " poistettu");
 		return res.status(200).json({ count: this.changes });
-	})
+		})
 })
 
 //muokkaus ei toimiva
 app.put('/resepti/edit/:id', (req, res, next) => {
 	let id = req.params.id;
 	let resepti = req.body;
-	db.run('INSERT INTO resepti (nimi) VALUES (?)', [id], [resepti.nimi], (error, result)=> {
+	db.run('UPDATE resepti SET nimi=? WHERE id=?', [resepti.nimi, id], (error, result)=> {
 		console.log('Yritetään muokata reseptin tietoja, id: ' + id);
 		if (error) throw error;
 		return res.status(200).json( {count: this.changes} );
@@ -156,8 +157,10 @@ app.get('/laatija/delete/:id', (req, res, next) => {
 app.put('/laatija/edit/:id', (req, res, next) => {
 	let id = req.params.id;
 	let laatija = req.body;
-	db.run('INSERT INTO laatija (etunimi) VALUES (?)', [id], [laatija.etunimi], (error, result)=> {
+	db.run('UPDATE laatija SET etunimi=? WHERE idl=?', [laatija.etunimi, id], (error, result)=> {
 		console.log('Yritetään muokata laatijan tietoja, id: ' + id);
+		console.log(laatija.etunimi); //undefined
+		console.log(laatija); //[object Object]
 		if (error) throw error;
 		return res.status(200).json( {count: this.changes} );
 	})

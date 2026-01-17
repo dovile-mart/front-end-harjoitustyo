@@ -25,23 +25,17 @@ function LaatijaMuokkaaMUI() {
     });
   };
 
-  const muokkaaLaatija = async() => {
-    //tietokantaan tallennusta varten
-        const formData = new FormData();
-        formData.append('etunimi', laatija.etunimi);
-      try {
-          editLaatija(formData);
-          // setViesti('Laatijan tietoja muokkattu');
-          /*setValues({
-            etunimi: "",
-        });*/
-        setViesti("Laatijan muokkaus: " + laatija.etunimi);
-          console.log(viesti);
-        } catch (error) {
-          setViesti('Laatijan muokkaus epäonnistui')
-          //console.log(error);
-        }
-      };
+  const muokkaaLaatija = async () => {
+    try {
+      await editLaatija(laatija.idl, laatija);
+      setViesti('Laatijan tietoja muokkattu:' + laatija.etunimi);
+      setViesti("Laatijan muokkaus: " + laatija.etunimi);
+      console.log(viesti);
+    } catch (error) {
+      setViesti('Laatijan muokkaus epäonnistui')
+      //console.log(error);
+    }
+  };
   
   return (
     <Paper sx={{ p: 2, mx: 'auto', mt: 10, maxWidth: 'md' }}>
